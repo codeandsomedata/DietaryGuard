@@ -70,4 +70,4 @@ This repository is a practical GitHub-ready scaffold based on the requested desi
 
 ## Demo Pitch
 
-Dietary Guard turns a food label photo into a structured dietary safety check for gluten, dairy, sugar, soy, and nuts, then lets users save verified safe foods locally.
+Dietary Guard is your offline grocery safety companion for travel. Standing in a store, holding a local snack with a label you can't read, no internet, and no desire to spend your vacation in a doctor's office, you can use Dietary Guard to translate the label, analyze ingredients, flag gluten, dairy, sugar, soy, and nuts, and save safe foods to your personal list. Everything runs locally on-device, stays private, and never sends your food or health information to the cloud.
