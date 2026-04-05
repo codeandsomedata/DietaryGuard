@@ -17,7 +17,7 @@ The intended runtime model is:
 - local safety classification
 - local safe-food persistence
 
-No Gemini-backed ADK web path is included anymore.
+No cloud-backed development path is included anymore.
 
 ## Files
 
@@ -62,7 +62,7 @@ cd "/Users/somdattabanerjee/Documents/ML course/dietary-guard"
 
 ## Important Note
 
-This repository no longer includes a Gemini-backed ADK path. It is intentionally focused on the offline Gemma direction only.
+This repository is intentionally focused on the offline Gemma direction only.
 
 At the moment, the final missing piece is a fully working local Gemma runtime installation for your machine. The project files here are prepared for that path, but the exact local model/runtime invocation still depends on the current LiteRT-LM and model packaging available for macOS.
 

@@ -1,48 +1,50 @@
 # Gemma 4 Local Runtime Notes
 
-This repository now supports two distinct development paths:
+This repository is focused only on the **Gemma local / offline** execution path.
 
-## 1. ADK + Gemini API
+## Target Runtime
 
-This is the runnable local setup already implemented in:
+The intended runtime stack is:
 
-- `agent.ts`
-- `package.json`
-- `.env.example`
+1. **Gemma local model bundle**
+2. **LiteRT-LM** for local inference
+3. **Image-capable prompt execution** for ingredient-label analysis
+4. **Local safe-food persistence** through the existing JSON fallback tool
 
-Use this path when you want to test the agent logic and tool flow locally through ADK.
+## Current State
 
-## 2. Gemma 4 + LiteRT-LM
+The repository already includes:
 
-This is the intended direction for a true offline/on-device workflow.
+- `SKILL.md` for the core dietary reasoning logic
+- `gemma_local_prompt.md` for local prompt execution
+- `run_gemma_local.sh` as a local invocation scaffold
+- `main.py` as a local persistence helper
+- `safe_foods.json` as a local saved-items store
 
-### Important Distinction
+## Current Local Blocker
 
-The Gemma-local path is **not the same runtime** as the ADK TypeScript web flow.
+On this machine, the LiteRT-LM installation path is partially reachable, but the package resolution failed because the dependency `litert-lm-api` was not available during install.
 
-- ADK TypeScript uses a hosted model API during local development
-- Gemma local requires a local runtime such as LiteRT-LM plus a local Gemma model bundle
+That means:
 
-### Current Status on This Machine
+- the repository is aligned to the **correct local Gemma direction**
+- the final missing step is a **working LiteRT-LM runtime installation**
 
-The `litert-lm` package is visible from PyPI, but installation failed because its dependency
-`litert-lm-api` was not available in this environment at install time.
+## What You Need for a True Local Run
 
-Because of that, this repository includes the prompt and script scaffolding for Gemma-local use,
-but the actual local Gemma runtime still depends on the current LiteRT-LM installation path and
-model packaging available for your machine.
+1. A working `litert-lm` install
+2. A compatible Gemma model package on disk
+3. A final command that accepts:
+   - a model path
+   - an image path
+   - the dietary guard prompt
 
-### What You Need for the True Local Gemma Path
+## Expected Invocation Shape
 
-1. A working LiteRT-LM runtime
-2. A compatible Gemma local model package
-3. An image-capable invocation path that supports label analysis
-4. A local notes/list persistence bridge or the existing JSON fallback
+Once LiteRT-LM is working, the target command shape should look like:
 
-### Files Added for the Gemma-Local Direction
+```bash
+litert-lm chat --model <MODEL_PATH> --image <IMAGE_PATH> --prompt-file gemma_local_prompt.md
+```
 
-- `gemma_local_prompt.md`
-- `run_gemma_local.sh`
-
-These files are designed to keep the repository aligned with the offline Gemma goal even though
-the TypeScript ADK app remains the most directly runnable local path right now.
+The exact final flags may differ depending on the LiteRT-LM release available for your machine.

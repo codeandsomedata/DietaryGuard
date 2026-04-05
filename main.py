@@ -29,9 +29,8 @@ def add_to_list(item_name: str, status: str) -> Dict[str, object]:
     """
     Adds a safe food item to a local Safe Foods list.
 
-    In a real ADK-integrated environment this tool can be mapped to
-    a notes or reminders bridge. In this local fallback implementation,
-    it writes to safe_foods.json in the skill folder.
+    In the local Gemma-oriented workflow, this acts as a simple offline
+    persistence layer by writing to safe_foods.json in the skill folder.
     """
     entry = {
         "item_name": item_name,
