@@ -4,105 +4,67 @@ Dietary Guard is your offline grocery safety companion for travel. Standing in a
 
 ## Repository Description
 
-Universal dietary safety skill for on-device AI agents with ingredient scanning, allergen detection, caution logic, and safe-food list saving.
+Universal dietary safety skill for Gemma-style local runtimes with ingredient scanning, allergen detection, caution logic, and safe-food list saving.
 
-## What This Project Includes
+## Project Goal
 
-- `SKILL.md` for the agent reasoning instructions
-- `config.json` for capability and runtime configuration
-- `main.py` for the local save-to-list tool
-- `safe_foods.json` as a local fallback store after saving items
-- `agent.ts` for a runnable TypeScript ADK agent
-- `package.json` and `tsconfig.json` for local ADK development
-- `.env.example` for local model configuration
+This repository is now focused only on the **Gemma local / offline** path.
 
-## Core Features
+The intended runtime model is:
 
-- multimodal ingredient label analysis
-- allergen detection for nuts, soy, gluten, dairy, and sugar
-- conservative caution logic for vague ingredients like `natural flavors`
-- danger logic for cross-contact phrases like `may contain`
-- local safe-food saving through a Python tool
+- local multimodal label reading
+- local ingredient reasoning
+- local safety classification
+- local safe-food persistence
+
+No Gemini-backed ADK web path is included anymore.
 
 ## Files
 
-- `SKILL.md` - main agent instructions and output schema
-- `config.json` - proposed runtime metadata and tool declarations
-- `main.py` - local safe-food storage tool
-- `safe_foods.json` - generated local output file after running the tool
-- `.gitignore` - common ignore rules
+- `SKILL.md` - core dietary-guard instruction set
+- `config.json` - skill metadata and capability declaration
+- `gemma_local_prompt.md` - prompt scaffold for a local Gemma runtime
+- `run_gemma_local.sh` - shell scaffold for local Gemma invocation
+- `GEMMA_LOCAL.md` - notes on the true offline Gemma path
+- `main.py` - local save-to-list fallback tool
+- `safe_foods.json` - local saved-items file
 - `LICENSE` - MIT license
 
-## Local Test
+## Core Features
 
-### Python fallback
+- offline-first dietary safety workflow
+- ingredient translation and interpretation
+- allergen detection for nuts, soy, gluten, dairy, and sugar
+- conservative caution handling for ambiguous ingredients
+- local storage of verified safe foods
+- privacy-first design with no cloud storage requirement
 
-Run the local tool:
+## Local Python Test
+
+You can test the local save behavior right now:
 
 ```bash
 cd "/Users/somdattabanerjee/Documents/ML course/dietary-guard"
 python3 main.py
+cat safe_foods.json
 ```
 
-That will write an example item into `safe_foods.json`.
+## Gemma Local Direction
 
-### ADK TypeScript setup
+The repository is structured for a true local Gemma runtime, but that runtime still depends on a working local LiteRT-LM or equivalent Gemma execution environment on your Mac.
 
-Install dependencies:
+Use the prompt and helper script as the local Gemma entry point:
 
 ```bash
 cd "/Users/somdattabanerjee/Documents/ML course/dietary-guard"
-npm install
-```
-
-Create your environment file:
-
-```bash
-cp .env.example .env
-```
-
-Then edit `.env` and paste your API key.
-
-Run the ADK web interface:
-
-```bash
-npx @google/adk-devtools web
-```
-
-Or run the agent in the terminal:
-
-```bash
-npx @google/adk-devtools run agent.ts
-```
-
-In the ADK web UI, select your agent from the dropdown and connect using the `GEMINI_API_KEY` from `.env`.
-
-## Example Output
-
-```json
-{
-  "success": true,
-  "saved_item": "Example Granola (Gluten-Free)",
-  "storage": "/Users/somdattabanerjee/Documents/ML course/dietary-guard/safe_foods.json"
-}
+./run_gemma_local.sh <MODEL_PATH> <IMAGE_PATH>
 ```
 
 ## Important Note
 
-This repository is now set up for local ADK testing on a MacBook. The exact latest Google AI Edge / Gemma packaging and public gallery submission flow should still be verified against current official documentation before final submission, especially if you intend to target on-device runtimes or a gallery-specific schema.
+This repository no longer includes a Gemini-backed ADK path. It is intentionally focused on the offline Gemma direction only.
 
-## Suggested GitHub Topics
-
-- `gemma`
-- `on-device-ai`
-- `multimodal`
-- `allergen-detection`
-- `dietary-safety`
-- `ingredient-scanner`
-- `food-tech`
-- `python`
-- `ai-agent`
-- `ai-skill`
+At the moment, the final missing piece is a fully working local Gemma runtime installation for your machine. The project files here are prepared for that path, but the exact local model/runtime invocation still depends on the current LiteRT-LM and model packaging available for macOS.
 
 ## Demo Pitch
 
