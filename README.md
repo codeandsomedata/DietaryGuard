@@ -19,12 +19,42 @@ The intended runtime model is:
 
 No cloud-backed development path is included anymore.
 
+## Verified Local Setup
+
+The local LiteRT-LM runtime is working on this Mac with:
+
+- `Python 3.14.3`
+- `litert-lm 0.10.1`
+
+Set it up with:
+
+```bash
+cd "/Users/somdattabanerjee/Documents/ML course/dietary-guard"
+python3.14 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install litert-lm
+```
+
+The verified CLI surface is:
+
+```bash
+litert-lm --help
+litert-lm run --help
+```
+
+The working command pattern is:
+
+```bash
+litert-lm run <MODEL_REFERENCE> --prompt "your prompt here"
+```
+
 ## Files
 
 - `SKILL.md` - core dietary-guard instruction set
 - `config.json` - skill metadata and capability declaration
 - `gemma_local_prompt.md` - prompt scaffold for a local Gemma runtime
-- `run_gemma_local.sh` - shell scaffold for local Gemma invocation
+- `run_gemma_local.sh` - verified LiteRT-LM runner for local prompt execution
 - `GEMMA_LOCAL.md` - notes on the true offline Gemma path
 - `main.py` - local save-to-list fallback tool
 - `safe_foods.json` - local saved-items file
@@ -51,20 +81,20 @@ cat safe_foods.json
 
 ## Gemma Local Direction
 
-The repository is structured for a true local Gemma runtime, but that runtime still depends on a working local LiteRT-LM or equivalent Gemma execution environment on your Mac.
+The repository is now aligned to the verified LiteRT-LM local runtime on your Mac.
 
-Use the prompt and helper script as the local Gemma entry point:
+Use the prompt and helper script as the local Gemma entry point once you have a compatible `.litertlm` model file or imported model ID:
 
 ```bash
 cd "/Users/somdattabanerjee/Documents/ML course/dietary-guard"
-./run_gemma_local.sh <MODEL_PATH> <IMAGE_PATH>
+./run_gemma_local.sh <MODEL_REFERENCE>
 ```
 
 ## Important Note
 
 This repository is intentionally focused on the offline Gemma direction only.
 
-At the moment, the final missing piece is a fully working local Gemma runtime installation for your machine. The project files here are prepared for that path, but the exact local model/runtime invocation still depends on the current LiteRT-LM and model packaging available for macOS.
+The remaining step is getting a compatible local Gemma `.litertlm` model bundle imported or available by path. The LiteRT-LM runtime itself is installed and verified. The current CLI help exposes text prompt execution and Python presets, but does not yet show a documented `--image` flag, so the repo avoids claiming a verified image command until that interface is confirmed.
 
 ## Demo Pitch
 

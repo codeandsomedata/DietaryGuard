@@ -17,34 +17,34 @@ The repository already includes:
 
 - `SKILL.md` for the core dietary reasoning logic
 - `gemma_local_prompt.md` for local prompt execution
-- `run_gemma_local.sh` as a local invocation scaffold
+- `run_gemma_local.sh` as a local LiteRT-LM runner
 - `main.py` as a local persistence helper
 - `safe_foods.json` as a local saved-items store
 
-## Current Local Blocker
+## Verified Runtime State
 
-On this machine, the LiteRT-LM installation path is partially reachable, but the package resolution failed because the dependency `litert-lm-api` was not available during install.
+On this machine:
 
-That means:
+- `python3.14 --version` returns `Python 3.14.3`
+- `pip install litert-lm` succeeded inside `.venv`
+- `litert-lm --help` and `litert-lm run --help` both work
 
-- the repository is aligned to the **correct local Gemma direction**
-- the final missing step is a **working LiteRT-LM runtime installation**
+That means the LiteRT-LM runtime is no longer the blocker.
 
 ## What You Need for a True Local Run
 
-1. A working `litert-lm` install
-2. A compatible Gemma model package on disk
-3. A final command that accepts:
-   - a model path
-   - an image path
-   - the dietary guard prompt
+1. A compatible Gemma `.litertlm` model package on disk, or an imported model ID
+2. The dietary guard prompt or preset
+3. A validated multimodal message path if image input is required
 
-## Expected Invocation Shape
+## Verified Invocation Shape
 
-Once LiteRT-LM is working, the target command shape should look like:
+The verified CLI command shape is:
 
 ```bash
-litert-lm chat --model <MODEL_PATH> --image <IMAGE_PATH> --prompt-file gemma_local_prompt.md
+litert-lm run <MODEL_REFERENCE> --prompt "your prompt here"
 ```
 
-The exact final flags may differ depending on the LiteRT-LM release available for your machine.
+## Notes on Image Input
+
+The currently installed CLI help does not expose a documented `--image` flag. LiteRT-LM does expose a Python API and a `--preset` option for Python-based tools and system instructions, so multimodal input may still be possible through the lower-level message API or a future CLI surface. Until that interface is verified, this repository intentionally documents only the working prompt-driven path.
