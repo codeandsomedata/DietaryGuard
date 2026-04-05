@@ -1,6 +1,6 @@
 # Dietary Guard
 
-Dietary Guard is a universal on-device dietary safety skill for AI agents. It analyzes ingredient labels from images, flags potential issues across gluten, dairy, sugar, soy, and nuts, applies conservative caution rules for ambiguous ingredients and cross-contact warnings, and can save verified safe items to a local Safe Foods list.
+Dietary Guard is your offline grocery safety companion for travel. Standing in a store, holding a local snack with a label you can't read, no internet, and no desire to spend your vacation in a doctor's office, you can use Dietary Guard to translate the label, analyze ingredients, flag gluten, dairy, sugar, soy, and nuts, and save safe foods to your personal list. Everything runs locally on-device, stays private, and never sends your food or health information to the cloud.
 
 ## Repository Description
 
