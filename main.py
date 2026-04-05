@@ -1,54 +1,23 @@
 import json
-from datetime import datetime
-from pathlib import Path
-from typing import Dict
+import os
 
-
-SAFE_FOODS_PATH = Path(__file__).with_name("safe_foods.json")
-
-
-def _load_items():
-    if not SAFE_FOODS_PATH.exists():
-        return []
-
-    try:
-        with SAFE_FOODS_PATH.open("r", encoding="utf-8") as handle:
-            data = json.load(handle)
-    except (json.JSONDecodeError, OSError):
-        return []
-
-    return data if isinstance(data, list) else []
-
-
-def _save_items(items):
-    with SAFE_FOODS_PATH.open("w", encoding="utf-8") as handle:
-        json.dump(items, handle, indent=2)
-
-
-def add_to_list(item_name: str, status: str) -> Dict[str, object]:
-    """
-    Adds a safe food item to a local Safe Foods list.
-
-    In the local Gemma-oriented workflow, this acts as a simple offline
-    persistence layer by writing to safe_foods.json in the skill folder.
-    """
-    entry = {
-        "item_name": item_name,
-        "status": status,
-        "saved_at": datetime.utcnow().isoformat(timespec="seconds") + "Z"
+def add_to_list(product_name: str, safety_status: str):
+    """Saves a safe food product to the local list."""
+    new_entry = {
+        "product": product_name,
+        "status": safety_status,
+        "date": "2026-04-05"
     }
-
-    items = _load_items()
-    items.append(entry)
-    _save_items(items)
-
-    return {
-        "success": True,
-        "saved_item": f"{item_name} ({status})",
-        "storage": str(SAFE_FOODS_PATH)
-    }
-
-
-if __name__ == "__main__":
-    demo = add_to_list("Example Granola", "Gluten-Free")
-    print(json.dumps(demo, indent=2))
+    
+    # Save to a local file on your Mac
+    file_path = "safe_foods.json"
+    data = []
+    if os.path.exists(file_path):
+        with open(file_path, "r") as f:
+            data = json.load(f)
+    
+    data.append(new_entry)
+    with open(file_path, "w") as f:
+        json.dump(data, f, indent=4)
+            
+    return {"message": f"Successfully added {product_name} to your list."}

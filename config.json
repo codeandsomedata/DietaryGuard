@@ -1,13 +1,8 @@
 {
-  "skill_id": "dietary-guard-universal-2026",
-  "name": "Dietary Guard",
-  "description": "On-device allergen and ingredient safety assistant for gluten, dairy, sugar, soy, and nuts.",
-  "min_model": "gemma-4",
-  "capabilities": [
-    "vision",
-    "reasoning",
-    "tool_use"
-  ],
+  "skill_id": "dietary-guard-mac-v1",
+  "version": "1.0.0",
+  "min_model": "Gemma-4-E4B",
+  "capabilities": ["vision", "reasoning", "notes_and_lists"],
   "settings": {
     "visual_token_budget": 1120,
     "thought_token_budget": 800,
@@ -15,12 +10,6 @@
   },
   "permissions": {
     "camera": "required",
-    "local_storage": "required"
-  },
-  "tools": [
-    {
-      "name": "add_to_list",
-      "description": "Adds a safe food item to a local Safe Foods list."
-    }
-  ]
+    "notes_and_lists": "required"
+  }
 }
