@@ -1,0 +1,29 @@
+{
+  "name": "dietary-guard",
+  "version": "1.0.0",
+  "description": "Dietary Guard ADK agent for offline-first ingredient safety workflows.",
+  "main": "agent.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev:web": "npx @google/adk-devtools web",
+    "dev:run": "npx @google/adk-devtools run agent.ts"
+  },
+  "keywords": [
+    "gemma",
+    "adk",
+    "dietary-safety",
+    "allergen-detection",
+    "multimodal",
+    "ai-agent"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@google/adk": "^0.2.0",
+    "@google/adk-devtools": "^0.2.0",
+    "dotenv": "^17.2.3",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

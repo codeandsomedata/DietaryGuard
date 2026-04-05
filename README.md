@@ -12,6 +12,9 @@ Universal dietary safety skill for on-device AI agents with ingredient scanning,
 - `config.json` for capability and runtime configuration
 - `main.py` for the local save-to-list tool
 - `safe_foods.json` as a local fallback store after saving items
+- `agent.ts` for a runnable TypeScript ADK agent
+- `package.json` and `tsconfig.json` for local ADK development
+- `.env.example` for local model configuration
 
 ## Core Features
 
@@ -32,6 +35,8 @@ Universal dietary safety skill for on-device AI agents with ingredient scanning,
 
 ## Local Test
 
+### Python fallback
+
 Run the local tool:
 
 ```bash
@@ -40,6 +45,37 @@ python3 main.py
 ```
 
 That will write an example item into `safe_foods.json`.
+
+### ADK TypeScript setup
+
+Install dependencies:
+
+```bash
+cd "/Users/somdattabanerjee/Documents/ML course/dietary-guard"
+npm install
+```
+
+Create your environment file:
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` and paste your API key.
+
+Run the ADK web interface:
+
+```bash
+npx @google/adk-devtools web
+```
+
+Or run the agent in the terminal:
+
+```bash
+npx @google/adk-devtools run agent.ts
+```
+
+In the ADK web UI, select your agent from the dropdown and connect using the `GEMINI_API_KEY` from `.env`.
 
 ## Example Output
 
@@ -53,7 +89,7 @@ That will write an example item into `safe_foods.json`.
 
 ## Important Note
 
-This repository is a practical GitHub-ready scaffold based on the requested design. The exact latest Google AI Edge / Gemma packaging and public gallery submission flow should still be verified against current official documentation before final submission.
+This repository is now set up for local ADK testing on a MacBook. The exact latest Google AI Edge / Gemma packaging and public gallery submission flow should still be verified against current official documentation before final submission, especially if you intend to target on-device runtimes or a gallery-specific schema.
 
 ## Suggested GitHub Topics
 
