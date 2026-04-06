@@ -1,0 +1,27 @@
+{
+  "skill_id": "dietary-guard-v1",
+  "version": "1.2.6",
+  "runtime_config": {
+    "runtime": "native_python",
+    "entrypoint": "main.py",
+    "disable_legacy_js_bridge": true
+  },
+  "model_config": {
+    "default_model": "Gemma-4-E4B-it",
+    "fallback_model": "Gemma-4-E2B-it",
+    "allow_dynamic_scaling": true
+  },
+  "capabilities": [
+    "vision",
+    "reasoning"
+  ],
+  "settings": {
+    "visual_token_budget": 560,
+    "thought_token_budget": 800,
+    "max_memory_mb": 3200,
+    "temperature": 1.0
+  },
+  "permissions": {
+    "camera": "required"
+  }
+}

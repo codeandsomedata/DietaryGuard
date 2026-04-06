@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dietary-guard-gemma4</title>
+</head>
+<body>
+  <script>
+    function normalizeInput(raw) {
+      if (!raw) return "";
+      if (typeof raw === "string") return raw;
+      if (typeof raw === "object") {
+        if (typeof raw.ingredients_text === "string") return raw.ingredients_text;
+        if (typeof raw.text === "string") return raw.text;
+        if (typeof raw.prompt === "string") return raw.prompt;
+        try {
+          return JSON.stringify(raw);
+        } catch (_) {
+          return "";
+        }
+      }
+      return String(raw);
+    }
+
+    function analyzeIngredients(rawInput) {
+      const text = normalizeInput(rawInput);
+      const lower = text.toLowerCase();
+
+      const rules = [
+        { category: "Soy", terms: ["lecithin", "edamame", "tofu", "miso"] },
+        { category: "Nuts", terms: ["arachis", "peanut", "cashew", "almond", "marzipan"] },
+        { category: "Gluten", terms: ["malt", "barley", "rye", "seitan", "spelt"] },
+        { category: "Sugar", terms: ["honey", "agave", "high fructose corn syrup", "molasses"] }
+      ];
+
+      const rows = [];
+
+      if (lower.includes("may contain")) {
+        rows.push({
+          category: "Cross-contact",
+          trigger: "May contain",
+          status: "🔴 DANGER",
+          reason: "The label includes a cross-contact warning."
+        });
+      }
+
+      if (lower.includes("natural flavors") || lower.includes("natural flavour")) {
+        rows.push({
+          category: "Ambiguous",
+          trigger: "Natural Flavors",
+          status: "🟡 CAUTION",
+          reason: "The label includes an ambiguous ingredient."
+        });
+      }
+
+      for (const rule of rules) {
+        for (const term of rule.terms) {
+          if (lower.includes(term)) {
+            rows.push({
+              category: rule.category,
+              trigger: term,
+              status: "🔴 DANGER",
+              reason: `Matched ${rule.category.toLowerCase()} trigger "${term}".`
+            });
+            break;
+          }
+        }
+      }
+
+      if (!rows.length) {
+        rows.push({
+          category: "Overall",
+          trigger: "None detected",
+          status: "🟢 SAFE",
+          reason: "No configured soy, nuts, gluten, sugar, or caution triggers were found."
+        });
+      }
+
+      let markdown = "| Category | Trigger Found | Status | Reason |\n";
+      markdown += "| :--- | :--- | :--- | :--- |\n";
+      for (const row of rows) {
+        markdown += `| ${row.category} | ${row.trigger} | ${row.status} | ${row.reason} |\n`;
+      }
+
+      const summary =
+        rows.some((row) => row.status === "🔴 DANGER")
+          ? "Summary: This item includes one or more danger triggers."
+          : rows.some((row) => row.status === "🟡 CAUTION")
+            ? "Summary: This item includes a caution trigger."
+            : "Summary: This item appears safe based on the configured trigger list.";
+
+      return `${markdown}\n${summary}`;
+    }
+
+    window.ai_edge_gallery_get_result = function(input) {
+      return analyzeIngredients(input);
+    };
+  </script>
+</body>
+</html>
