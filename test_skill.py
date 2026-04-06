@@ -12,17 +12,15 @@ with litert_lm.Engine(model_path) as engine:
     # 3. Create a conversation with your Tools (main.py) and Instructions (SKILL.md)
     with engine.create_conversation(
         tools=[add_to_list],
-        messages=[
-            {"role": "system", "content": skill_instructions}
-        ]
+        system_instruction=skill_instructions
     ) as session:
-        
+
         # 4. Run the test
         test_ingredients = "Ingredients: Whole grain oats, sugar, honey, malt extract."
         print(f"Testing ingredients: {test_ingredients}\n")
-        
+
         # This will trigger the 'Thinking' process automatically in Gemma 4
         response = session.send_message(test_ingredients)
-        
+
         print("--- MODEL RESPONSE ---")
         print(response["content"][0]["text"])
