@@ -1,8 +1,8 @@
 import json
 import os
 
-def add_to_list(product_name: str, safety_status: str):
-    """Saves a safe food product to the local list."""
+def Notes(product_name: str, safety_status: str):
+    """Saves a verified safe food product to the local list."""
     new_entry = {
         "product": product_name,
         "status": safety_status,
@@ -21,3 +21,8 @@ def add_to_list(product_name: str, safety_status: str):
         json.dump(data, f, indent=4)
             
     return {"message": f"Successfully added {product_name} to your list."}
+
+
+def add_to_list(product_name: str, safety_status: str):
+    """Backward-compatible alias for earlier local tests."""
+    return Notes(product_name, safety_status)
