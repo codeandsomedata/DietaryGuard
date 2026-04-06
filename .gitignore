@@ -4,6 +4,8 @@ __pycache__/
 *.log
 *.profraw
 .venv-gemma/
+.venv/
 node_modules/
 dist/
 build/
+safe_foods.json

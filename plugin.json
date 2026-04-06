@@ -1,5 +1,0 @@
-{
-  "schema": "skill-1.0.0",
-  "entrypoint": "main.py",
-  "setup_args": {}
-}
