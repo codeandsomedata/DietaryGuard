@@ -1,5 +1,4 @@
 import litert_lm
-from main import Notes
 
 # 1. Load your Skill Logic
 with open("SKILL.md", "r") as f:
@@ -9,9 +8,8 @@ with open("SKILL.md", "r") as f:
 model_path = "/Users/somdattabanerjee/.litert-lm/models/gemma-4-E4B-it/model.litertlm"
 
 with litert_lm.Engine(model_path) as engine:
-    # 3. Create a conversation with your Tools (main.py) and Instructions (SKILL.md)
+    # 3. Create a conversation with just the Instructions (SKILL.md)
     with engine.create_conversation(
-        tools=[Notes],
         messages=[
             {"role": "system", "content": skill_instructions}
         ]
