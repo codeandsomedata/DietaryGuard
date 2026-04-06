@@ -1,6 +1,6 @@
 ---
-name: dietary-guard
-description: Vision agent to flag Soy, Nuts, Gluten, and Added Sugar in food labels.
+Name: dietary-guard
+Description: Vision agent to flag Soy, Nuts, Gluten, and Added Sugar in food labels.
 version: 1.2.2
 capabilities: [vision, reasoning, storage]
 ---
