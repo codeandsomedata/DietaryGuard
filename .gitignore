@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 *.log
+*.profraw
 .venv-gemma/
 node_modules/
 dist/
