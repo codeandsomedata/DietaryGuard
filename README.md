@@ -1,10 +1,10 @@
 # Dietary Guard
 
-Dietary Guard is your offline grocery safety companion for travel. Standing in a store, holding a local snack with a label you can't read, no internet, and no desire to spend your vacation in a doctor's office, you can use Dietary Guard to translate the label, analyze ingredients, flag gluten, dairy, sugar, soy, and nuts, and save safe foods to your personal list. Everything runs locally on-device, stays private, and never sends your food or health information to the cloud.
+Dietary Guard is your offline grocery safety companion for travel. Standing in a store, holding a local snack with a label you can't read, no internet, and no desire to spend your vacation in a doctor's office, you can use Dietary Guard to translate the label, analyze ingredients, and flag gluten, dairy, sugar, soy, and nuts. Everything runs locally on-device, stays private, and never sends your food or health information to the cloud.
 
 ## Repository Description
 
-Universal dietary safety skill for Gemma-style local runtimes with ingredient scanning, allergen detection, caution logic, and safe-food list saving.
+Universal dietary safety skill for Gemma-style local runtimes with ingredient scanning, allergen detection, and caution logic for food label images and ingredient lists.
 
 ## Project Goal
 
@@ -15,7 +15,6 @@ The intended runtime model is:
 - local multimodal label reading
 - local ingredient reasoning
 - local safety classification
-- local safe-food persistence
 
 No cloud-backed development path is included anymore.
 
@@ -66,12 +65,11 @@ litert-lm run <MODEL_REFERENCE> --prompt "your prompt here"
 - ingredient translation and interpretation
 - allergen detection for nuts, soy, gluten, dairy, and sugar
 - conservative caution handling for ambiguous ingredients
-- local storage of verified safe foods
 - privacy-first design with no cloud storage requirement
 
 ## Local Python Test
 
-You can test the local save behavior right now:
+You can test the local helper behavior right now:
 
 ```bash
 cd "/Users/somdattabanerjee/Documents/ML course/dietary-guard"
@@ -98,4 +96,4 @@ The remaining step is getting a compatible local Gemma `.litertlm` model bundle 
 
 ## Demo Pitch
 
-Dietary Guard is your offline grocery safety companion for travel. Standing in a store, holding a local snack with a label you can't read, no internet, and no desire to spend your vacation in a doctor's office, you can use Dietary Guard to translate the label, analyze ingredients, flag gluten, dairy, sugar, soy, and nuts, and save safe foods to your personal list. Everything runs locally on-device, stays private, and never sends your food or health information to the cloud.
+Dietary Guard is your offline grocery safety companion for travel. Standing in a store, holding a local snack with a label you can't read, no internet, and no desire to spend your vacation in a doctor's office, you can use Dietary Guard to translate the label, analyze ingredients, and flag gluten, dairy, sugar, soy, and nuts. Everything runs locally on-device, stays private, and never sends your food or health information to the cloud.
