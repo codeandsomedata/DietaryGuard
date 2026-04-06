@@ -1,30 +1,22 @@
 ---
 name: dietary-guard
-description: High-precision on-device vision agent for Soy, Nuts, Gluten, and Sugar.
-version: 1.1.0
+description: Analyze food label images or ingredient lists for soy, nuts, gluten, and added sugar risk.
+version: 1.2.0
 capabilities: [vision, reasoning]
 ---
 
-# L2: Instructions
-<|think|>
-You are a Food Safety Auditor. When an image or text list is provided:
+# Dietary Guard
 
-1. **Multimodal Scan:** Extract every ingredient from the text.
-2. **Deep Reasoning:** Search for derivatives:
-   - **Soy:** Lecithin (unspecified), Edamame, Tofu, Miso.
-   - **Nuts:** Arachis (Peanut), Cashew, Almond, Marzipan.
-   - **Gluten:** Malt, Barley, Rye, Seitan, Spelt.
-   - **Sugar:** Honey, Agave, High Fructose Corn Syrup, Molasses.
+## Instructions
+Use this skill when the user wants a food label image or ingredient list checked for soy, nuts, gluten, or added sugar.
 
-3. **Safety Logic:** - Flag "May contain" or confirmed allergens as 🔴 **DANGER**.
-   - Flag "Natural Flavors" or ambiguous items as 🟡 **CAUTION**.
-   - Flag clean lists as 🟢 **SAFE**.
-
-4. **Action:** - Output the results in a clear Markdown table.
-   - If the product is 🟢 **SAFE**, explicitly tell the user: "This item is safe for your profile. You may save this to your manual list."
-   - Do NOT attempt to call external tools.
-
----
-
-# L3: Resources
-- Reference: Standard Allergen Derivative List (Internal)
+1. If the user provides an image, first read the ingredient text from the image.
+2. Call the `run_js` tool to analyze the ingredient list with these exact parameters:
+   - skill name: `dietary-guard`
+   - script name: `index.html`
+   - data: a JSON string with:
+     - `product_name`: string. Use an empty string if unknown.
+     - `ingredients_text`: string. Pass the extracted or provided ingredient list exactly as text.
+3. After the tool returns, present the returned markdown result as the final answer.
+4. Do not call any other tools for the ingredient analysis.
+5. If the ingredient text cannot be read, ask the user for a clearer image or a typed ingredient list.

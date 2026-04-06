@@ -8,8 +8,7 @@
   },
   "capabilities": [
     "vision",
-    "reasoning",
-    "notes_and_lists"
+    "reasoning"
   ],
   "settings": {
     "visual_token_budget": 1024,
@@ -18,7 +17,6 @@
     "max_memory_mb": 3500
   },
   "permissions": {
-    "camera": "required",
-    "storage": "required"
+    "camera": "required"
   }
 }
