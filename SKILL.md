@@ -1,5 +1,5 @@
 ---
-name: dietary-guard
+name: dietary-guard-gemma4
 description: High-precision on-device vision agent for Soy, Nuts, Gluten, and Sugar.
 version: 1.1.0
 capabilities: [vision, reasoning]
