@@ -1,15 +1,24 @@
 {
-  "skill_id": "dietary-guard-mac-v1",
+  "skill_id": "dietary-guard-v1",
   "version": "1.0.0",
-  "min_model": "Gemma-4-E4B",
-  "capabilities": ["vision", "reasoning", "notes_and_lists"],
+  "model_config": {
+    "default_model": "Gemma-4-E4B-it",
+    "fallback_model": "Gemma-4-E2B-it",
+    "allow_dynamic_scaling": true
+  },
+  "capabilities": [
+    "vision",
+    "reasoning",
+    "notes_and_lists"
+  ],
   "settings": {
-    "visual_token_budget": 1120,
+    "visual_token_budget": 1024,
     "thought_token_budget": 800,
-    "temperature": 0.0
+    "temperature": 0.0,
+    "max_memory_mb": 3500
   },
   "permissions": {
     "camera": "required",
-    "notes_and_lists": "required"
+    "storage": "required"
   }
 }
